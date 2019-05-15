@@ -8,7 +8,7 @@ class Game(models.Model):
     """
     Handles the game itself
     """
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.CharField(primary_key=True, default=uuid.uuid4, editable=False, max_length=200)
     state = models.CharField(choices=(
         (0, 'finished'),
         (1, 'ongoing')
