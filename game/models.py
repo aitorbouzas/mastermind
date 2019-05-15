@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+import uuid
 from django.db import models
 
 
@@ -7,7 +8,7 @@ class Game(models.Model):
     """
     Handles the game itself
     """
-    id = models.CharField(max_length=10, primary_key=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     state = models.CharField(choices=(
         (0, 'finished'),
         (1, 'ongoing')
@@ -19,7 +20,7 @@ class Game(models.Model):
 
     @classmethod
     def create(cls):
-        game = cls(id="1", state="1", c1="RED", c2="GREEN", c3="BLUE", c4="YELLOW")
+        game = cls(state="1", c1="RED", c2="GREEN", c3="BLUE", c4="YELLOW")
         game.save()
         return game
 
