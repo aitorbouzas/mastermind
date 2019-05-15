@@ -19,8 +19,12 @@ class Game(models.Model):
     c4 = models.CharField(max_length=10)
 
     @classmethod
-    def create(cls):
-        game = cls(state="1", c1="RED", c2="GREEN", c3="BLUE", c4="YELLOW")
+    def create(cls, colors=False):
+        if colors:
+            game = cls(state="1", c1=colors[0], c2=colors[1], c3=colors[2], c4=colors[3])
+        else:
+            # TODO: get random colors if no colors are provided
+            game = cls(state="1", c1="RED", c2="GREEN", c3="BLUE", c4="YELLOW")
         game.save()
         return game
 
