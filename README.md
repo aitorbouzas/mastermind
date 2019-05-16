@@ -26,6 +26,7 @@ This repository contains a Django DRF RESTful API production ready for the known
 
 ## ROADMAP / KNOWN PROBLEMS
 
+- Security and tokens
 - Travis should make tests with Docker too
 - Colors should be a model with ids
 - Check that colors passed in guesses are correct (because no one knows which color es "RDE")
