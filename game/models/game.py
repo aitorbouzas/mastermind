@@ -1,8 +1,10 @@
 from __future__ import unicode_literals
 
 import uuid
+import random
 from django.db import models
 
+COLORS = ["RED", "GREEN", "BLUE", "YELLOW"]
 
 class Game(models.Model):
     """
@@ -23,6 +25,6 @@ class Game(models.Model):
 
     @classmethod
     def create(cls):
-        game = cls(state=1, c1="RED", c2="GREEN", c3="BLUE", c4="YELLOW")
+        game = cls(state=1, c1=random.choice(COLORS), c2=random.choice(COLORS), c3=random.choice(COLORS), c4=random.choice(COLORS))
         game.save()
         return game

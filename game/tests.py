@@ -14,7 +14,7 @@ class CreateGameTest(TestCase):
             'c1': "YELLOW",
             'c2': "RED",
             'c3': "RED",
-            'c4': "GREEN"
+            'c4': "GREEN",
         }
         self.invalidGameCreation = {
             'c1': "RED",
