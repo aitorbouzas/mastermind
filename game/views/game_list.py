@@ -4,9 +4,10 @@ from django.http import HttpResponse
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 
-from game.models.game import Game
-from game.serializers import GameSerializer
+from ..models.game import Game
+from ..serializers import GameSerializer, GameDetailSerializer
 
 
 class GameList(APIView):
@@ -19,10 +20,30 @@ class GameList(APIView):
 
     # CREATE NEW GAME
     def post(self, request, format=None):
-        # If colors data is provided, it means that maybe it has colors, so we should check
+        return_status = status.HTTP_400_BAD_REQUEST
+        # If data is provided, it means that it has colors, so we should check
         if request.data:
-            game = Game.create(colors=request.data.getlist('colors'))
+            values = {
+                'state': 1,
+                'c1': request.data.get('c1'),
+                'c2': request.data.get('c2'),
+                'c3': request.data.get('c3'),
+                'c4': request.data.get('c4'),
+            }
+            serializer = GameDetailSerializer(data=values)
+
+            if serializer.is_valid():
+                serializer.save()
+                result = serializer.data
+                return_status = status.HTTP_200_OK
+            else:
+                result = serializer.errors
         else:
+            # Calling create without parameters should create a random game
             game = Game.create()
-        serializer = GameSerializer(game)
-        return Response(serializer.data)
+
+            # We serialize it with GameSerializer so it doesn't tells you it's colors
+            serializer = GameSerializer(game)
+            result = serializer.data
+            return_status = status.HTTP_200_OK
+        return Response(result, status=return_status)

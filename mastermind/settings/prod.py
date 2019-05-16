@@ -4,11 +4,11 @@ DEBUG = True
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mastermind',
-        'USER': 'postgres',
-        'PASSWORD': 'abc1234.',
-        'HOST': '127.0.0.1',
-        'PORT': '5432'
+        'ENGINE': os.getenv('DATABASE_ENGINE', 'django.db.backends.postgresql_psycopg2'),
+        'NAME': os.getenv('DATABASE_NAME', 'django'),
+        'USER': os.getenv('DATABASE_USER', 'django'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'django'),
+        'HOST': os.getenv('DATABASE_SERVICE_HOST', 'database'),
+        'PORT': os.getenv('DATABASE_SERVICE_PORT', 5432)
     }
 }
