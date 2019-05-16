@@ -112,30 +112,33 @@ class CreateGameTest(TestCase):
     def test_history_game(self):
         response = self.client.post('/game/', data=self.validGameCreation)
         game = json.loads(response.content.decode('utf-8'))
-        guess1 = {
-            'c1': "YELLOW",
-            'c2': "RED",
-            'c3': "RED",
-            'c4': "GREEN"
-        }
-        guess2 = {
-            'c1': "RED",
-            'c2': "RED",
-            'c3': "RED",
-            'c4': "BLUE"
-        }
+        guesses = [
+            {
+                'c1': "YELLOW",
+                'c2': "RED",
+                'c3': "RED",
+                'c4': "RED"
+            },
+            {
+                'c1': "RED",
+                'c2': "RED",
+                'c3': "RED",
+                'c4': "BLUE"
+            }
+        ]
 
-        self.client.post('/game/' + game.get('id'), data=guess1)
-        self.client.post('/game/' + game.get('id'), data=guess2)
-
+        for guess in guesses:
+            self.client.post('/game/' + game.get('id'), data=guess)
 
         response = self.client.get('/game/' + game.get('id'))
         history = json.loads(response.content.decode('utf-8'))
 
         # History should contain two guesses
         self.assertEqual(2, len(history))
-        for guess in history:
-            self.assertEqual(guess1['c1'], guess.get('c1'))
-            self.assertEqual(guess1['c2'], guess.get('c2'))
-            self.assertEqual(guess1['c3'], guess.get('c3'))
-            self.assertEqual(guess1['c4'], guess.get('c4'))
+        i = 0
+        for h in history:
+            self.assertEqual(guesses[i].get('c1'), h.get('c1'))
+            self.assertEqual(guesses[i].get('c2'), h.get('c2'))
+            self.assertEqual(guesses[i].get('c3'), h.get('c3'))
+            self.assertEqual(guesses[i].get('c4'), h.get('c4'))
+            i += 1

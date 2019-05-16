@@ -14,7 +14,10 @@ from ..serializers import GuessSerializer
 class GameDetail(APIView):
     # GET GAME HISTORY
     def get(self, request, id, format=None):
-        return Response({})
+        game = Game.objects.get(id=id)
+        guesses = Guess.objects.filter(game_id=game)
+        ser_guesses = GuessSerializer(guesses, many=True)
+        return Response(ser_guesses.data)
 
     # POST A GUESS
     def post(self, request, id, format=None):
