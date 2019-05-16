@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/aitorbouzas/mastermind.svg?branch=master)](https://travis-ci.com/aitorbouzas/mastermind)
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/aitorbouzas/mastermind.svg)
 
 # Mastermind RESTful API
 
