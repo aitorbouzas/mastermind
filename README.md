@@ -10,6 +10,7 @@ This repository contains a Django DRF RESTful API production ready for the known
  - Python
  - Django
  - Django Rest Framework
+ - PostgreSQL (local tests are made with sqlite with the dev.settings, travis and docker are working with PostgreSQL)
  - PyCharm (IDE)
  - Travis (CI)
  - Docker (deployment)
@@ -21,7 +22,7 @@ This repository contains a Django DRF RESTful API production ready for the known
 |--|--|--|--|--|
 | /game | GET |  ||List of games with ids and states
 | /game | POST | Optional: c1,c2,c3,c4 |Pass a color in each variable and it will create a game with that solution (this is mainly for testing purposes). If no colors are provided it creates a random game|Created game info (without the solution)
-|/game/\<game:id\>|GET|||History of the game id passed. Guesses made and it's results
+|/game/\<game:id\>|GET|||History of the game id passed. Returns the guesses made and it's results.
 |/game/\<game:id\>|POST|c1,c2,c3,c4|Pass a color in each attribute to make a guess| The guess results with its black pegs (correctly guessed color and position) or white pegs (correctly guessed color but not in the exact position)
 
 ## ROADMAP / KNOWN PROBLEMS

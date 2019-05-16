@@ -137,8 +137,10 @@ class CreateGameTest(TestCase):
         self.assertEqual(2, len(history))
         i = 0
         for h in history:
-            self.assertEqual(guesses[i].get('c1'), h.get('c1'))
-            self.assertEqual(guesses[i].get('c2'), h.get('c2'))
-            self.assertEqual(guesses[i].get('c3'), h.get('c3'))
-            self.assertEqual(guesses[i].get('c4'), h.get('c4'))
+            self.assertIsNotNone(h.get('c1'))
+            self.assertIsNotNone(h.get('c2'))
+            self.assertIsNotNone(h.get('c3'))
+            self.assertIsNotNone(h.get('c4'))
+            self.assertIsNotNone(h.get('black_pegs'))
+            self.assertIsNotNone(h.get('white_pegs'))
             i += 1
